@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterworks Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .conversion-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <nav class="quick-menu">
+            <h3>Calculators</h3>
+            <ul>
+                <li><a href="#volume-calc">Volume</a></li>
+                <li><a href="#unit-conversions">Unit Conversions</a></li>
+                <li><a href="#flow-velocity-calc">Flow/Velocity</a></li>
+                <li><a href="#tank-time-calc">Tank Emptying</a></li>
+                <li><a href="#dosing-calc">Dosing</a></li>
+            </ul>
+        </nav>
+
+        <nav class="content-wrapper">
+            <header class="main-header">
+                <div class="header-left">
+                    <span class="brand-text">SPU</span>
+                    <h1>Waterworks Calculator</h1>
+                </div>
+                <div class="header-logos">
+                    <img src="public/images/logo1.png" alt="First SPU Logo">
+                    <img src="public/images/logo2.png" alt="Second SPU Logo">
+                </div>
+            </header>
+
+            <div class="container">
+
+                <div class="calculator-section" id="volume-calc">
+                    <h2>Volume Calculations</h2>
+                    <div class="conversion-row">
+                        <div class="conversion-subsection">
+                            <h3>Cylinder</h3>
+                            <div class="input-group">
+                                <label for="cylinder-radius">Radius (ft):</label>
+                                <input type="number" id="cylinder-radius">
+                            </div>
+                            <div class="input-group">
+                                <label for="cylinder-height">Height (ft):</label>
+                                <input type="number" id="cylinder-height">
+                            </div>
+                            <button onclick="calculateCylinderVolume()">Calculate Volume</button>
+                            <div class="result" id="cylinder-volume-result"></div>
+                        </div>
+                        <div class="conversion-subsection">
+                            <h3>Box</h3>
+                            <div class="input-group">
+                                <label for="box-length">Length (ft):</label>
+                                <input type="number" id="box-length">
+                            </div>
+                            <div class="input-group">
+                                <label for="box-width">Width (ft):</label>
+                                <input type="number" id="box-width">
+                            </div>
+                            <div class="input-group">
+                                <label for="box-height">Height (ft):</label>
+                                <input type="number" id="box-height">
+                            </div>
+                            <button onclick="calculateBoxVolume()">Calculate Volume</button>
+                            <div class="result" id="box-volume-result"></div>
+                        </div>
+                        <div class="conversion-subsection">
+                            <h3>Cone</h3>
+                            <div class="input-group">
+                                <label for="cone-radius">Radius (ft):</label>
+                                <input type="number" id="cone-radius">
+                            </div>
+                            <div class="input-group">
+                                <label for="cone-height">Height (ft):</label>
+                                <input type="number" id="cone-height">
+                            </div>
+                            <button onclick="calculateConeVolume()">Calculate Volume</button>
+                            <div class="result" id="cone-volume-result"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section" id="unit-conversions">
+                    <h2>Unit Conversions</h2>
+                    <div class="conversion-grid">
+                        <div class="conversion-subsection">
+                            <h3>Flow</h3>
+                            <div class="input-group"><label for="flow-conversion-from">From:</label><select
+                                    id="flow-conversion-from">
+                                    <option value="mgd">MGD</option>
+                                    <option value="cfs">CFS</option>
+                                    <option value="gpm">GPM</option>
+                                </select></div>
+                            <div class="input-group"><label for="flow-conversion-value">Value:</label><input
+                                    type="number" id="flow-conversion-value"></div>
+                            <div class="input-group"><label for="flow-conversion-to">To:</label><select
+                                    id="flow-conversion-to">
+                                    <option value="mgd">MGD</option>
+                                    <option value="cfs">CFS</option>
+                                    <option value="gpm">GPM</option>
+                                </select></div><button onclick="convertFlow()">Convert Flow</button>
+                            <div class="result" id="flow-conversion-result"></div>
+                        </div>
+                        <div class="conversion-subsection">
+                            <h3>Volume</h3>
+                            <div class="input-group"><label for="volume-conversion-from">From:</label><select
+                                    id="volume-conversion-from">
+                                    <option value="gallons">Gallons</option>
+                                    <option value="cubicfeet">Cubic Feet</option>
+                                    <option value="acreft">Acre-ft</option>
+                                    <option value="liters">Liters</option>
+                                </select></div>
+                            <div class="input-group"><label for="volume-conversion-value">Value:</label><input
+                                    type="number" id="volume-conversion-value"></div>
+                            <div class="input-group"><label for="volume-conversion-to">To:</label><select
+                                    id="volume-conversion-to">
+                                    <option value="gallons">Gallons</option>
+                                    <option value="cubicfeet">Cubic Feet</option>
+                                    <option value="acreft">Acre-ft</option>
+                                    <option value="liters">Liters</option>
+                                </select></div><button onclick="convertVolume()">Convert Volume</button>
+                            <div class="result" id="volume-conversion-result"></div>
+                        </div>
+                        <div class="conversion-subsection">
+                            <h3>Area</h3>
+                            <div class="input-group"><label for="area-conversion-from">From:</label><select
+                                    id="area-conversion-from">
+                                    <option value="sqin">Square Inches</option>
+                                    <option value="sqft">Square Feet</option>
+                                    <option value="sqm">Square Meters</option>
+                                    <option value="acre">Acre</option>
+                                    <option value="sqmi">Square Miles</option>
+                                </select></div>
+                            <div class="input-group"><label for="area-conversion-value">Value:</label><input
+                                    type="number" id="area-conversion-value"></div>
+                            <div class="input-group"><label for="area-conversion-to">To:</label><select
+                                    id="area-conversion-to">
+                                    <option value="sqin">Square Inches</option>
+                                    <option value="sqft">Square Feet</option>
+                                    <option value="sqm">Square Meters</option>
+                                    <option value="acre">Acre</option>
+                                    <option value="sqmi">Square Miles</option>
+                                </select></div><button onclick="convertArea()">Convert Area</button>
+                            <div class="result" id="area-conversion-result"></div>
+                        </div>
+                        <div class="conversion-subsection">
+                            <h3>Temperature</h3>
+                            <div class="input-group"><label for="temp-conversion-from">From:</label><select
+                                    id="temp-conversion-from">
+                                    <option value="celsius">Celsius</option>
+                                    <option value="fahrenheit">Fahrenheit</option>
+                                    <option value="kelvin">Kelvin</option>
+                                </select></div>
+                            <div class="input-group"><label for="temp-conversion-value">Value:</label><input
+                                    type="number" id="temp-conversion-value"></div>
+                            <div class="input-group"><label for="temp-conversion-to">To:</label><select
+                                    id="temp-conversion-to">
+                                    <option value="celsius">Celsius</option>
+                                    <option value="fahrenheit">Fahrenheit</option>
+                                    <option value="kelvin">Kelvin</option>
+                                </select></div><button onclick="convertTemp()">Convert Temperature</button>
+                            <div class="result" id="temp-conversion-result"></div>
+                        </div>
+                        <div class="conversion-subsection">
+                            <h3>Weight</h3>
+                            <div class="input-group"><label for="weight-conversion-from">From:</label><select
+                                    id="weight-conversion-from">
+                                    <option value="kg">Kilograms</option>
+                                    <option value="lbs">Pounds</option>
+                                    <option value="oz">Ounces</option>
+                                </select></div>
+                            <div class="input-group"><label for="weight-conversion-value">Value:</label><input
+                                    type="number" id="weight-conversion-value"></div>
+                            <div class="input-group"><label for="weight-conversion-to">To:</label><select
+                                    id="weight-conversion-to">
+                                    <option value="kg">Kilograms</option>
+                                    <option value="lbs">Pounds</option>
+                                    <option value="oz">Ounces</option>
+                                </select></div><button onclick="convertWeight()">Convert Weight</button>
+                            <div class="result" id="weight-conversion-result"></div>
+                        </div>
+                        <div class="conversion-subsection">
+                            <h3>Power</h3>
+                            <div class="input-group"><label for="power-conversion-from">From:</label><select
+                                    id="power-conversion-from">
+                                    <option value="hp">Horsepower</option>
+                                    <option value="watts">Watts</option>
+                                    <option value="ergs">Ergs/Second</option>
+                                    <option value="kcals">KiloCalories/Second</option>
+                                    <option value="btus">BTUs/Second</option>
+                                </select></div>
+                            <div class="input-group"><label for="power-conversion-value">Value:</label><input
+                                    type="number" id="power-conversion-value"></div>
+                            <div class="input-group"><label for="power-conversion-to">To:</label><select
+                                    id="power-conversion-to">
+                                    <option value="hp">Horsepower</option>
+                                    <option value="watts">Watts</option>
+                                    <option value="ergs">Ergs/Second</option>
+                                    <option value="kcals">KiloCalories/Second</option>
+                                    <option value="btus">BTUs/Second</option>
+                                </select></div><button onclick="convertPower()">Convert Power</button>
+                            <div class="result" id="power-conversion-result"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-section" id="flow-velocity-calc">
+                    <div class="conversion-subsection">
+                        <h2>Flow/Velocity Calculations</h2>
+                        <div class="input-group"><label for="flow-calc-type">Calculate:</label><select
+                                id="flow-calc-type">
+                                <option value="flow">Flow (Q)</option>
+                                <option value="velocity">Velocity (V)</option>
+                            </select></div>
+                        <div class="input-group" id="flow-input-group"><label for="flow-flow">Flow:</label><input
+                                type="number" id="flow-flow" placeholder="Enter flow value"><select id="flow-units">
+                                <option value="cfs">cfs</option>
+                                <option value="gpm">gpm</option>
+                                <option value="mgd">MGD</option>
+                            </select></div>
+                        <div class="input-group" id="velocity-input-group"><label
+                                for="flow-velocity">Velocity:</label><input type="number" id="flow-velocity"
+                                placeholder="Enter velocity value"><select id="velocity-units">
+                                <option value="fts">ft/s</option>
+                                <option value="ms">m/s</option>
+                            </select></div>
+                        <div class="input-group" id="pipe-size-input-group"><label for="flow-pipe-size">Nominal Pipe
+                                Size
+                                (in):</label><input type="number" id="flow-pipe-size" placeholder="Enter pipe size">
+                        </div>
+                        <button onclick="calculateFlow()">Calculate</button>
+                        <div class="result" id="flow-result"></div>
+                    </div>
+                </div>
+
+                <div class="calculator-section" id="tank-time-calc">
+                    <div class="conversion-subsection">
+                        <h2>Tank Emptying Time</h2>
+                        <div class="input-group"><label for="tank-radius">Radius (ft):</label><input type="number"
+                                id="tank-radius"></div>
+                        <div class="input-group"><label for="tank-height">Height (ft):</label><input type="number"
+                                id="tank-height"></div>
+                        <div class="input-group"><label for="tank-flow">Flow (cfs):</label><input type="number"
+                                id="tank-flow"></div><button onclick="calculateEmptyTime()">Calculate Empty
+                            Time</button>
+                        <div class="result" id="empty-time-result"></div>
+                    </div>
+                </div>
+                <div class="calculator-section" id="dosing-calc">
+                    <div class="conversion-subsection">
+                        <h2>Dosing Calculations</h2>
+                        <div class="input-group"><label for="dose-dose">Dose (mg/L):</label><input type="number"
+                                id="dose-dose"></div>
+                        <div class="input-group"><label for="dose-flow">Flow (MGD):</label><input type="number"
+                                id="dose-flow"></div><button onclick="calculateDose()">Calculate Dose (lbs/day)</button>
+                        <div class="result" id="dose-result"></div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="/main.js"></script>
+
+            <footer>
+                <p>&copy; 2025 Seattle Public Utilities. Produced in association with Tiger Tail Tech.</p>
+            </footer>
+        </nav>
+    </body>
+
+</html>
