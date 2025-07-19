@@ -109,7 +109,27 @@ function toggleFlowInputs(calcType) {
 }
 
 // Event listener to initialize and update the UI
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+    const hamburgerBtn = document.querySelector('.hamburger-menu');
+    const closeMenuBtn = document.querySelector('.close-menu');
+    const navMenu = document.querySelector('.quick-menu');
+    const navLinks = document.querySelectorAll('.quick-menu a');
+
+    const toggleMenu = () => {
+        navMenu.classList.toggle('menu-open');
+        hamburgerBtn.classList.toggle('active'); // 
+    };
+    hamburgerBtn.addEventListener('click', toggleMenu);
+    closeMenuBtn.addEventListener('click', toggleMenu);
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('menu-open')) {
+                toggleMenu();
+            }
+        });
+    });
     const flowCalcTypeDropdown = document.getElementById("flow-calc-type");
     if (flowCalcTypeDropdown) {
         flowCalcTypeDropdown.addEventListener("change", (event) => toggleFlowInputs(event.target.value));
